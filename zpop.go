@@ -59,7 +59,7 @@ func NewRedisPool(redis_conf RedisConfType) *redis.Pool {
 	return redis_client_pool
 }
 
-func zpop(rc redis.Conn, key string) (result string, err error) {
+func Zpop(rc redis.Conn, key string) (result string, err error) {
 	result, err = redis.String(ZpopScript.Do(rc, "zz"))
 	if err == redis.ErrNil {
 		return result, nil
@@ -85,6 +85,6 @@ func main() {
 	rc := redisPool.Get()
 	defer rc.Close()
 
-	v, err := zpop(rc, key)
+	v, err := Zpop(rc, key)
 	fmt.Printf("value: %s, error: %v", v, err)
 }
