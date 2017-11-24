@@ -1,8 +1,7 @@
-package main
+package zpop
 
 import (
 	"errors"
-	"fmt"
 	"time"
 
 	"github.com/garyburd/redigo/redis"
@@ -67,24 +66,3 @@ func Zpop(rc redis.Conn, key string) (result string, err error) {
 	return result, nil
 }
 
-func main() {
-
-	key := "zz"
-
-	redisConfig := RedisConfType{
-		RedisPw:          "",
-		RedisHost:        "127.0.0.1:6379",
-		RedisDb:          0,
-		RedisMaxActive:   100,
-		RedisMaxIdle:     100,
-		RedisIdleTimeOut: 1000,
-	}
-
-	redisPool := NewRedisPool(redisConfig)
-
-	rc := redisPool.Get()
-	defer rc.Close()
-
-	v, err := Zpop(rc, key)
-	fmt.Printf("value: %s, error: %v", v, err)
-}
