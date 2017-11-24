@@ -6,12 +6,12 @@ use redis lua script to make zset's zpop function !
 
 ## Usage:
 
-*input rc,  redigo/redis*
-
-*input key, zset key name*
-
 ```
-func Zpop(rc redis.Conn, key string) (result string, err error) {
+func Zpop(rc redis.Conn, key string) (result string, err error)
+
+:param rc,  redigo conn
+:param key, zset key name
+
 ```
 
 end.
